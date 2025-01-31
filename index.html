@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Email Detector</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2b1a47; /* Deep violet background */
+            color: #fff; /* White text for contrast */
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #3a245e; /* Slightly lighter violet for the container */
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(128, 0, 128, 0.5); /* Violet glow */
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #d291ff; /* Lighter violet for the heading */
+            text-shadow: 0 0 15px #d291ff, 0 0 30px #bf40bf, 0 0 50px #7a4b8d; /* Neon glow effect */
+            font-family: 'Verdana', sans-serif;
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #d291ff, 0 0 20px #bf40bf, 0 0 30px #822ea6;
+            }
+            to {
+                text-shadow: 0 0 20px #d291ff, 0 0 40px #bf40bf, 0 0 50px #6d26a3;
+            }
+        }
+        p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #e0aaff; /* Light violet */
+        }
+        .explanation {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e0aaff; /* Light violet */
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            padding: 20px;
+            border: none;
+            background-color: #4c2f6e; /* Rich violet for the file input */
+            color: #fff;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            width: 80%; /* Increase the size */
+            cursor: pointer;
+        }
+        button {
+            padding: 15px 30px;
+            background-color: #7a4b8d; /* Dark violet button */
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(128, 0, 128, 0.5); /* Button shadow for glow effect */
+        }
+        button:hover {
+            background-color: #9c5db7; /* Slightly lighter on hover */
+            box-shadow: 0 4px 20px rgba(128, 0, 128, 0.7); /* Stronger glow on hover */
+        }
+        #file-list-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #5a3778; /* Dark violet background for file list */
+            border-radius: 10px;
+            color: #e0aaff; /* Light violet text for better visibility */
+            box-shadow: 0 4px 10px rgba(128, 0, 128, 0.5);
+        }
+        #file-list-container h3 {
+            margin: 0 0 10px;
+            text-align: center;
+            color: #d291ff; /* Lighter violet for headings */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phishing Email Detector</h1>
+        <p>Phishing emails are deceptive messages designed to trick recipients into revealing sensitive information such as login credentials, credit card numbers, or personal details. These emails often appear legitimate, but they use tactics like fake sender addresses, urgent language, and misleading links to deceive users.</p>
+
+        <div class="explanation">
+            <h2>How to Use This Website</h2>
+            <p>This website helps you detect phishing emails by analyzing email files. You can upload email files (with the `.eml` format), and our system will evaluate them for phishing traits such as suspicious links, misleading sender addresses, or urgent messages.</p>
+            <p>To start, simply upload your email file using the form below. The system will scan your file and give you the results, helping you identify any potential phishing attempts.</p>
+        </div>
+
+        <form method="post" action="/detect" enctype="multipart/form-data">
+            <input type="file" name="eml_files" id="file-input" multiple accept=".eml">
+            <br>
+            <button type="submit">Upload and Detect</button>
+        </form>
+
+        <!-- File list container -->
+        <div id="file-list-container" style="display: none">
+            <h3>Uploaded Files</h3>
+            <ul id="file-list"></ul>
+            <p id="total-files"></p>
+        </div>
+    </div>
+
+    <script>
+        // Get references to DOM elements
+        const fileInput = document.getElementById('file-input');
+        const fileListContainer = document.getElementById('file-list-container');
+        const fileList = document.getElementById('file-list');
+        const totalFiles = document.getElementById('total-files');
+
+        // Add event listener for file input
+        fileInput.addEventListener('change', function(event) {
+            const files = event.target.files; // Get the list of files
+            const fileNames = [];
+
+            // Clear previous file list
+            fileList.innerHTML = '';
+
+            // Populate the list with the names of uploaded files
+            for (let i = 0; i < files.length; i++) {
+                fileNames.push(files[i].name); // Get file name
+                const listItem = document.createElement('li');
+                listItem.textContent = files[i].name; // Set the file name as list item text
+                fileList.appendChild(listItem); // Add list item to the unordered list
+            }
+
+            // Update the total number of files
+            totalFiles.textContent = `Total Files: ${fileNames.length}`;
+
+            // Show the file list container
+            fileListContainer.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flagged Emails Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2b1a47; /* Deep violet background */
+            color: #fff; /* White text for contrast */
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #3a245e; /* Slightly lighter violet for the container */
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(128, 0, 128, 0.5); /* Violet glow */
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #d291ff; /* Soft violet title */
+            text-shadow: 0 0 15px #a854e6, 0 0 30px #bf40bf; /* Bold glow effect */
+            font-family: 'Verdana', sans-serif;
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #d291ff, 0 0 20px #bf40bf, 0 0 30px #822ea6;
+            }
+            to {
+                text-shadow: 0 0 20px #d291ff, 0 0 40px #bf40bf, 0 0 50px #6d26a3;
+            }
+        }
+        p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #e0aaff; /* Light violet */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #4c2f6e; /* Rich violet for table */
+            color: #fff; /* White text */
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #d291ff; /* Violet borders */
+        }
+        th {
+            background-color: #6a348f; /* Deep violet for headers */
+            color: #ffdbff; /* Light pastel for header text */
+            font-weight: bold;
+            text-shadow: 0 0 5px #ffdbff;
+        }
+        pre {
+            font-size: 1rem;
+            color: #ffa6ff; /* Light pink-violet text for email content */
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #e5baff; /* Pastel violet for bullet points */
+        }
+        a {
+            text-decoration: none;
+            color: #f06aff; /* Neon pink-violet links */
+            font-weight: bold;
+            margin: 0 10px;
+            text-shadow: 0 0 10px #f06aff;
+        }
+        a:hover {
+            color: #ffb3ff; /* Light pastel on hover */
+            text-shadow: 0 0 15px #ffb3ff;
+        }
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flagged Emails Dashboard</h1>
+
+        {% if flagged_emails|length == 0 %}
+            <p>No flagged emails at the moment.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email Content</th>
+                        <th>Phishing Traits Identified</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for email in flagged_emails %}
+                        <tr>
+                            <td>
+                                <pre>{{ email.email_text }}</pre>
+                            </td>
+                            <td>
+                                <ul>
+                                    {% for trait in email.traits %}
+                                        <li>{{ trait }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <div class="links">
+    <a href="/results" class="button-link">View Results</a>
+    <a href="/owasp" class="button-link">View OWASP Guidelines</a>
+    <a href="/" class="button-link">Back to Home</a>
+    </div>
+</body>
+</html>
+
+

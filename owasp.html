@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP Guidelines</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2b1a47; /* Deep violet background */
+            color: #fff; /* White text for contrast */
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #3a245e; /* Slightly lighter violet for the container */
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(128, 0, 128, 0.5); /* Violet glow */
+        }
+        h1, h2 {
+            color: #d291ff; /* Lighter violet for headings */
+            text-align: center;
+            font-family: 'Verdana', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #d291ff, 0 0 30px #bf40bf, 0 0 50px #7a4b8d; /* Neon glow effect */
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+            padding: 12px;
+            background: #4c2f6e; /* Rich violet for list items */
+            border: 1px solid #d291ff; /* Violet borders */
+            border-radius: 6px;
+            color: #e0aaff; /* Light violet text */
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin: 30px auto;
+            padding: 12px 24px;
+            background: #7a4b8d; /* Dark violet background */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            max-width: 220px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #f06aff;
+        }
+        a:hover {
+            background: #9c5db7; /* Lighter on hover */
+            text-shadow: 0 0 15px #ffb3ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OWASP Phishing Guidelines</h1>
+
+        <!-- Section for Users -->
+        <h2>For Users: Recognizing and Handling Phishing Emails</h2>
+        <ul>
+            <li>Always verify the sender's email address.</li>
+            <li>Do not click on links from untrusted sources.</li>
+            <li>Hover over links to check their actual destination before clicking.</li>
+            <li>Avoid opening suspicious attachments.</li>
+            <li>Report phishing emails to your IT department or email provider.</li>
+        </ul>
+
+        <!-- Section for App Creators -->
+        <h2>For App Creators: Building Secure Apps to Detect Phishing</h2>
+        <ul>
+            <li>Utilize email header analysis to detect spoofing attempts.</li>
+            <li>Implement user training programs on phishing awareness.</li>
+            <li>Use machine learning models to detect phishing patterns.</li>
+            <li>Enforce two-factor authentication to add an extra layer of security.</li>
+            <li>Regularly update phishing detection algorithms with threat intelligence data.</li>
+        </ul>
+
+        <a href="/" class="button-link">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Results</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2b1a47; /* Deep violet background */
+            color: #fff; /* White text for contrast */
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #3a245e; /* Slightly lighter violet for the container */
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(128, 0, 128, 0.5); /* Violet glow */
+        }
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #d291ff; /* Lighter violet for the heading */
+            text-shadow: 0 0 15px #d291ff, 0 0 30px #bf40bf, 0 0 50px #7a4b8d; /* Neon glow effect */
+            font-family: 'Verdana', sans-serif;
+            letter-spacing: 2px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #d291ff, 0 0 20px #bf40bf, 0 0 30px #822ea6;
+            }
+            to {
+                text-shadow: 0 0 20px #d291ff, 0 0 40px #bf40bf, 0 0 50px #6d26a3;
+            }
+        }
+        .result {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #d291ff; /* Lighter violet */
+            text-shadow: 0 0 10px #d291ff, 0 0 20px #9c5db7, 0 0 30px #7a4b8d; /* Subtle glow effect */
+        }
+        h3 {
+            color: #ffdbff; /* Light pastel purple for subheadings */
+            font-size: 1.4rem;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+            color: #e0aaff; /* Light violet */
+        }
+        pre {
+            font-size: 1rem;
+            color: #ffa6ff; /* Light pink-violet text for email content */
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #e0aaff; /* Light violet */
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #7a4b8d; /* Darker violet for separation */
+            margin: 20px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #f06aff; /* Neon pink-violet links */
+            font-weight: bold;
+            margin: 0 10px;
+            text-shadow: 0 0 10px #f06aff;
+        }
+        a:hover {
+            color: #ffb3ff; /* Light pastel on hover */
+            text-shadow: 0 0 15px #ffb3ff;
+        }
+        .alert {
+            color: red;
+            font-weight: bold;
+        }
+        .safe {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phishing Email Detection Results</h1>
+
+        <!-- Display results for multiple files -->
+        {% for result in results %}
+            <div class="result">
+                <h2>File: {{ result.filename }}</h2>
+                <h3>Email Metadata</h3>
+                <ul>
+                    <li><strong>From:</strong> {{ result.email_data["From"] }}</li>
+                    <li><strong>To:</strong> {{ result.email_data["To"] }}</li>
+                    <li><strong>Subject:</strong> {{ result.email_data["Subject"] }}</li>
+                    <li><strong>Date:</strong> {{ result.email_data["Date"] }}</li>
+                </ul>
+
+                <h3>Content</h3>
+                <pre>{{ result.email_data["Content"] }}</pre>
+
+                <h3>Detection Summary</h3>
+                <p><strong>Machine Learning Analysis:</strong> {{ result.ml_result }}</p>
+
+                {% if result.phishing_traits|length > 0 %}
+                    <h3>Phishing Traits Detected:</h3>
+                    <ul>
+                        {% for trait in result.phishing_traits %}
+                            <li>{{ trait }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h3 class="alert">Alert: This email appears to be a phishing attempt!</h3>
+                {% else %}
+                    <h3 class="safe">No suspicious traits detected. Email may be legitimate.</h3>
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+
+        <br>
+
+    <a href="/" class="button-link">Back to Home</a>
+    <a href="/dashboard" class="button-link">View Flagged Emails</a>
+
+    </div>
+</body>
+</html>
